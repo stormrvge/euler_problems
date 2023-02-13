@@ -11,14 +11,17 @@ solve(StartYear, EndYear) ->
 solve(Year, Month, Day, Sundays, EndYear) ->
   DaysInMonth = days_in_month(Month, Year),
   NextMonth = (Month rem 12) + 1,
-  NextYear = if NextMonth =:= 1 -> Year + 1; true -> Year end,
+  NextYear = case NextMonth =:= 1 of
+               true -> Year + 1;
+               false -> Year
+             end,
   NextDay = (Day + DaysInMonth) rem 7,
   case NextYear of
     EndYear -> Sundays;
     _ -> case Day =:= 0 of
-              true -> solve(NextYear, NextMonth, NextDay, Sundays + 1, EndYear);
-              false -> solve(NextYear, NextMonth, NextDay, Sundays, EndYear)
-            end
+           true -> solve(NextYear, NextMonth, NextDay, Sundays + 1, EndYear);
+           false -> solve(NextYear, NextMonth, NextDay, Sundays, EndYear)
+         end
   end.
 
 
