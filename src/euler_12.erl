@@ -1,18 +1,23 @@
 -module(euler_12).
+-export([solve/0, solve/1, solve/2]).
 
--export([solve/0]).
+triangle_number(N) -> lists:sum(lists:seq(1, N)).
 
-divisors(N) -> divisors(N, 1, []).
+divisors(N) -> divisors(N, lists:seq(1, round(math:sqrt(N)))).
 
-divisors(N, I, Divisors) when I > (N div 2) -> lists:reverse(Divisors);
-divisors(N, I, Divisors) when N rem I == 0 -> divisors(N, I + 1, [I | Divisors]);
-divisors(N, I, Divisors) -> divisors(N, I + 1, Divisors).
+divisors(N, [H|T]) ->
+  case N rem H of
+    0 -> [H, N div H | divisors(N, T)];
+    _ -> divisors(N, T)
+  end;
+divisors(_N, []) -> [].
 
-solve() -> solve(1, 0).
-
-solve(N, T) ->
-  io:format("T = ~w\n", [T]),
-  case length(divisors(T)) > 500 of
-    true -> T;
-    false -> solve(N + 1, T + N)
+solve() -> solve(1, 500).
+solve(Limit) -> solve(1, Limit).
+solve(N, Limit) ->
+  Triangle = triangle_number(N),
+  Divisors = divisors(Triangle),
+  case length(Divisors) of
+    L when L > Limit -> Triangle;
+    _ -> solve(N + 1, Limit)
   end.

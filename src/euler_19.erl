@@ -1,12 +1,20 @@
 -module(euler_19).
--export([start/0, solve/2]).
+-export([start/0, run_solve/2]).
 
 start() ->
-  solve(1901, 2000).
+  run_solve(1901, 2001).
 
-solve(StartYear, EndYear) ->
+run_solve(StartYear, EndYear) ->
+  StartPid = self(),
+  spawn(fun() -> solve(StartYear, EndYear, StartPid) end),
+  receive
+    {StartPid, Result} -> Result
+  end.
+
+solve(StartYear, EndYear, StartPid) ->
   {Year, Month, Day} = {StartYear, 1, 1},
-  solve(Year, Month, Day, 0, EndYear).
+  Result = solve(Year, Month, Day, 0, EndYear),
+  StartPid ! {StartPid, Result}.
 
 solve(Year, Month, Day, Sundays, EndYear) ->
   DaysInMonth = days_in_month(Month, Year),
