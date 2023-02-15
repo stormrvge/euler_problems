@@ -1,5 +1,5 @@
 -module(euler_19).
--export([start/0, run_solve/2]).
+-export([start/0, is_leap_year/1, run_solve/2, days_in_month/2]).
 
 start() ->
   run_solve(1901, 2001).
@@ -32,11 +32,10 @@ solve(Year, Month, Day, Sundays, EndYear) ->
          end
   end.
 
-
-days_in_month(Year, Month) ->
-  case is_leap_year(Year) of
-    true -> days_in_month(leap_year, Month, Year);
-    false -> days_in_month(not_leap_year, Month, Year)
+days_in_month(Month, Year) ->
+  case is_leap_year(Month) of
+    true -> days_in_month(leap_year, Year, Month);
+    false -> days_in_month(not_leap_year, Year, Month)
   end.
 
 days_in_month(not_leap_year, _Year, Month) ->

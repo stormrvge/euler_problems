@@ -1,23 +1,28 @@
 -module(euler_12).
--export([solve/0, solve/1, solve/2]).
+-export([start/0, solve/1, triangular_number/1, divisors/1]).
 
-triangle_number(N) -> lists:sum(lists:seq(1, N)).
+start() ->
+  N = 500,
+  find_triangular_num_with_n_divisors(N).
 
-divisors(N) -> divisors(N, lists:seq(1, round(math:sqrt(N)))).
+solve(N) ->
+  find_triangular_num_with_n_divisors(N).
 
-divisors(N, [H|T]) ->
-  case N rem H of
-    0 -> [H, N div H | divisors(N, T)];
-    _ -> divisors(N, T)
-  end;
-divisors(_N, []) -> [].
+find_triangular_num_with_n_divisors(N) ->
+  find_triangular_num_with_n_divisors(1, N).
 
-solve() -> solve(1, 500).
-solve(Limit) -> solve(1, Limit).
-solve(N, Limit) ->
-  Triangle = triangle_number(N),
-  Divisors = divisors(Triangle),
-  case length(Divisors) of
-    L when L > Limit -> Triangle;
-    _ -> solve(N + 1, Limit)
+find_triangular_num_with_n_divisors(TriNum, N) ->
+  case divisors(triangular_number(TriNum)) > N of
+    true -> triangular_number(TriNum);
+    false -> find_triangular_num_with_n_divisors(TriNum + 1, N)
+  end.
+
+triangular_number(N) ->
+  N * (N + 1) div 2.
+
+divisors(N) ->
+  NumFactors = length([X || X <- lists:seq(1, round(math:sqrt(N))), N rem X =:= 0]),
+  case N == math:sqrt(N) * math:sqrt(N) of
+    true -> NumFactors * 2 - 1;
+    false -> NumFactors * 2
   end.
