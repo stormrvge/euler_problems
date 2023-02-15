@@ -12,7 +12,7 @@ run_solve(StartYear, EndYear) ->
   end.
 
 solve(StartYear, EndYear, StartPid) ->
-  {Year, Month, Day} = {StartYear, 1, 1},
+  {Year, Month, Day} = {StartYear, 1, 2},
   Result = solve(Year, Month, Day, 0, EndYear),
   StartPid ! {StartPid, Result}.
 
@@ -33,7 +33,7 @@ solve(Year, Month, Day, Sundays, EndYear) ->
   end.
 
 days_in_month(Month, Year) ->
-  case is_leap_year(Month) of
+  case is_leap_year(Year) of
     true -> days_in_month(leap_year, Year, Month);
     false -> days_in_month(not_leap_year, Year, Month)
   end.

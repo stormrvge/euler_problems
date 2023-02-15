@@ -6,7 +6,7 @@
 
 sunday_count_test() ->
   ?assertEqual(86, euler_19:run_solve(1800, 1850)),
-  ?assertEqual(101, euler_19:run_solve(1901, 1960)),
+  ?assertEqual(102, euler_19:run_solve(1901, 1960)),
   ?assertEqual(118, euler_19:run_solve(1901, 1970)),
   ?assertEqual(135, euler_19:run_solve(1901, 1980)),
   ?assertEqual(171, euler_19:run_solve(1901, 2001)).
