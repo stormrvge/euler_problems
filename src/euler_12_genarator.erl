@@ -1,5 +1,5 @@
 -module(euler_12_genarator).
--export([start_generator/1]).
+-export([start/0, start_generator/1]).
 
 -define(MAX_GENERATOR_ITERATION, 100000000).
 
@@ -59,3 +59,6 @@ start_generator(Limit) ->
   Permutations = take_permutation(GeneratorPid, ?MAX_GENERATOR_ITERATION),
   close_permutation_generator(GeneratorPid),
   Permutations.
+
+start() ->
+  start_generator(500).
