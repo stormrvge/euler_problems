@@ -99,7 +99,7 @@ next_permutation(GeneratorPid) ->
 
 start_generator(Limit) ->
   GeneratorPid = create_permutation_generator(Limit),
-  Permutations = take_permutation(GeneratorPid, ?PERMUTATION_NUMBER),
+  Permutations = take_permutation(GeneratorPid, ?MAX_GENERATOR_ITERATION),
   close_permutation_generator(GeneratorPid),
   Permutations.
 ```

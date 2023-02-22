@@ -1,7 +1,7 @@
 -module(euler_12_genarator).
 -export([start_generator/1]).
 
--define(PERMUTATION_NUMBER, 100000000).
+-define(MAX_GENERATOR_ITERATION, 100000000).
 
 find_triangular_num_with_n_divisors(TriNum, N) ->
   case divisors(triangular_number(TriNum)) > N of
@@ -56,6 +56,6 @@ next_permutation(GeneratorPid) ->
 
 start_generator(Limit) ->
   GeneratorPid = create_permutation_generator(Limit),
-  Permutations = take_permutation(GeneratorPid, ?PERMUTATION_NUMBER),
+  Permutations = take_permutation(GeneratorPid, ?MAX_GENERATOR_ITERATION),
   close_permutation_generator(GeneratorPid),
   Permutations.
