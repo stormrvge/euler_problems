@@ -1,4 +1,4 @@
--module(euler_19).
+-module(euler_19_non_tail).
 -export([start/0, is_leap_year/1, run_solve/2, days_in_month/2]).
 
 start() ->
@@ -13,23 +13,22 @@ run_solve(StartYear, EndYear) ->
 
 solve(StartYear, EndYear, StartPid) ->
   {Year, Month, Day} = {StartYear, 1, 2},
-  Result = solve(Year, Month, Day, 0, EndYear),
+  Result = solve(Year, Month, Day, EndYear),
   StartPid ! {StartPid, Result}.
 
-solve(Year, Month, Day, Sundays, EndYear) ->
+solve(Year, Month, Day, EndYear) ->
   DaysInMonth = days_in_month(Month, Year),
   NextMonth = (Month rem 12) + 1,
-  NextYear = case NextMonth =:= 1 of
-               true -> Year + 1;
-               false -> Year
+  NextYear = case {NextMonth, Year} of
+               {1, Y} when true -> Y + 1;
+               {_, Y} -> Y
              end,
   NextDay = (Day + DaysInMonth) rem 7,
-  case NextYear of
-    EndYear -> Sundays;
-    _ -> case Day =:= 0 of
-           true -> solve(NextYear, NextMonth, NextDay, Sundays + 1, EndYear);
-           false -> solve(NextYear, NextMonth, NextDay, Sundays, EndYear)
-         end
+
+  case {NextYear, Day, EndYear} of
+    {_, 0, _} -> 1 + solve(NextYear, NextMonth, NextDay, EndYear);
+    {EndYear, _, _} -> 0;
+    _ -> solve(NextYear, NextMonth, NextDay, EndYear)
   end.
 
 days_in_month(Month, Year) ->
