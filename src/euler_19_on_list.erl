@@ -1,4 +1,4 @@
--module(euler_19_list_filter).
+-module(euler_19_on_list).
 -export([start/0, solve/2]).
 
 start() ->

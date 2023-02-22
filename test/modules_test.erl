@@ -15,11 +15,11 @@ sunday_count_test() ->
   ?assertEqual(118, euler_19_non_tail:run_solve(1901, 1970)),
   ?assertEqual(135, euler_19_non_tail:run_solve(1901, 1980)),
   ?assertEqual(171, euler_19_non_tail:run_solve(1901, 2001)),
-  ?assertEqual(86, euler_19_list_filter:solve(1800, 1849)),
-  ?assertEqual(102, euler_19_list_filter:solve(1901, 1959)),
-  ?assertEqual(118, euler_19_list_filter:solve(1901, 1969)),
-  ?assertEqual(135, euler_19_list_filter:solve(1901, 1979)),
-  ?assertEqual(171, euler_19_list_filter:solve(1901, 2000)).
+  ?assertEqual(86, euler_19_on_list:solve(1800, 1849)),
+  ?assertEqual(102, euler_19_on_list:solve(1901, 1959)),
+  ?assertEqual(118, euler_19_on_list:solve(1901, 1969)),
+  ?assertEqual(135, euler_19_on_list:solve(1901, 1979)),
+  ?assertEqual(171, euler_19_on_list:solve(1901, 2000)).
 
 
 leap_year_test() ->
