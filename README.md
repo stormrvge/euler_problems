@@ -177,7 +177,7 @@ solve(Year, Month, Day, Sundays, EndYear) ->
 ```
 
 Also, solution on lists functions
-```
+```Erlang
 start() ->
   solve(1901, 2000).
 
