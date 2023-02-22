@@ -1,4 +1,4 @@
--module(euler_12).
+-module(euler_12_tail).
 -export([start/0, solve/1, triangular_number/1, divisors/1]).
 
 start() ->
