@@ -32,7 +32,13 @@ find_triangular_num_with_n_divisors_test() ->
   ?assertEqual(5460, euler_12_tail:solve(45)),
   ?assertEqual(73920, euler_12_tail:solve(100)),
   ?assertEqual(2031120, euler_12_tail:solve(200)),
-  ?assertEqual(76576500, euler_12_tail:solve(500)).
+  ?assertEqual(76576500, euler_12_tail:solve(500)),
+  ?assertEqual(120, euler_12_genarator:start_generator(10)),
+  ?assertEqual(2016, euler_12_genarator:start_generator(30)),
+  ?assertEqual(5460, euler_12_genarator:start_generator(45)),
+  ?assertEqual(73920, euler_12_genarator:start_generator(100)),
+  ?assertEqual(2031120, euler_12_genarator:start_generator(200)),
+  ?assertEqual(76576500, euler_12_genarator:start_generator(500)).
 
 triangular_number_test() ->
   ?assertEqual(28, euler_12_tail:triangular_number(7)),
